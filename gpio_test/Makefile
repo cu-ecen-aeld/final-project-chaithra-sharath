@@ -8,24 +8,25 @@ ifeq ($(CFLAGS),)
 	CFLAGS= -g -Wall -Werror
 endif
 
-#ifeq ($(LDFLAGS),)
+ifeq ($(LDFLAGS),)
 	LDFLAGS= -lgpiod
-#endif
+endif
 
 all: gpioreadtest gpiowritetest
 default: gpioreadtest gpiowritetest
 
+test_gpio_read.o: test_gpio_read.c
+	$(CC) $(CFLAGS) -c test_gpio_read.c
+
 gpioreadtest : test_gpio_read.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) -o gpioreadtest test_gpio_read.o $(LDFLAGS)
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_read.o -o gpioreadtest $(LDFLAGS)
+
+
+test_gpio_write.o: test_gpio_write.c
+	$(CC) $(CFLAGS) -c test_gpio_write.c
 
 gpiowritetest : test_gpio_write.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) -o gpiowritetest test_gpio_write.o $(LDFLAGS)
-
-test_gpio_read.o : test_gpio_read.c
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) -c test_gpio_read.c $(LDFLAGS)
-
-test_gpio_write.o : test_gpio_write.c
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) -c test_gpio_write.c $(LDFLAGS)
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_write.o -o gpiowritetest $(LDFLAGS)
 
 clean :
 	rm -f gpioreadtest gpiowritetest *.o
