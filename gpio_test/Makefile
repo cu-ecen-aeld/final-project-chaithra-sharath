@@ -8,9 +8,7 @@ ifeq ($(CFLAGS),)
 	CFLAGS= -g -Wall -Werror
 endif
 
-ifeq ($(LDFLAGS),)
 	LDFLAGS= -lgpiod
-endif
 
 all: gpioreadtest gpiowritetest
 default: gpioreadtest gpiowritetest
