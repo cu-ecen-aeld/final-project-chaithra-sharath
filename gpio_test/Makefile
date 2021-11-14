@@ -17,14 +17,14 @@ test_gpio_read.o: test_gpio_read.c
 	$(CC) $(CFLAGS) -c test_gpio_read.c
 
 gpioreadtest : test_gpio_read.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_read.o -o gpioreadtest -lgpiod
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_read.o -o gpioreadtest $(LDFLAGS)
 
 
 test_gpio_write.o: test_gpio_write.c
 	$(CC) $(CFLAGS) -c test_gpio_write.c
 
 gpiowritetest : test_gpio_write.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_write.o -o gpiowritetest -lgpiod
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) test_gpio_write.o -o gpiowritetest $(LDFLAGS)
 
 clean :
 	rm -f gpioreadtest gpiowritetest *.o
