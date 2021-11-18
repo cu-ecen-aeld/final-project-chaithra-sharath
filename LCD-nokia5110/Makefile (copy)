@@ -1,0 +1,24 @@
+INCLUDE_DIRS =
+LIB_DIRS =
+CC=$(CROSS_COMPILE)gcc
+CFLAGS= -g -Wall
+LDFLAGS= -lrt -pthread
+
+all: lcd
+
+armbianio.o: armbianio.c
+	$(CC) $(CFLAGS) -c armbianio.c armbianio.h
+
+armbian: armbianio.o
+	$(CC) $(CFLAGS) armbianio.o -o armbian -lrt -pthread
+	
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c armbianio.c
+
+lcd: main.o
+	$(CC) $(CFLAGS) main.o -o lcd
+
+        
+clean:
+	rm -f *.o
+	rm -f armbian
