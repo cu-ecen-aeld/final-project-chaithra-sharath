@@ -21,7 +21,7 @@
 #include <sys/ioctl.h>
 #include "nokia5110.h"
 #include "armbianio.h"
-unsigned char ucFont[], ucSmallFont[];
+unsigned char ucFont[65535], ucSmallFont[65535];
 static int iScreenOffset; // current write offset of screen data
 static unsigned char ucScreen[504]; // local copy of the image buffer
 static int file_spi = 0;

@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc 
 CFLAGS = -Wall
 LDFLAGS = -lrt -pthread
 OBJFILES = nokia5110.o armbianio.o main.o
