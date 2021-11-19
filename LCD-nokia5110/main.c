@@ -19,7 +19,7 @@
 int main(int argc, char* argv[])
 {
 int rc;
-//int i, x, y;
+int i, x, y;
 
 	// SPI Channel, D/C, RESET, LED
 	rc = nokiaInit(0, 37, 35, 13);
@@ -33,7 +33,7 @@ int rc;
 	nokiaWriteString(1, 3, "Chaithra Suresh", FONT_NORMAL);
 	nokiaWriteString(2, 4, "Sprint 2", FONT_SMALL);
 	
-	/*
+	
 	// draw a box around the whole display
 	for (x=0; x<84; x++)
 	{
@@ -65,7 +65,7 @@ int rc;
 		nokiaSetPixel(x, y, 1);	
 	}
 	
-	*/
+	
 	
 	usleep(4000000);
 
