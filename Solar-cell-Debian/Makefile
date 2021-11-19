@@ -9,6 +9,7 @@ ifeq ($(CFLAGS),)
 endif
 
 all: solarc
+
 default: solarc
 
 solarc.o: solarc.c
