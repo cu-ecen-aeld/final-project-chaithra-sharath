@@ -168,7 +168,7 @@ int i;
 //
 int AIOInit(void)
 {
-	return AIOInitBoard(NULL);
+	return AIOInitBoard("Raspberry Pi");
 }
 
 //
