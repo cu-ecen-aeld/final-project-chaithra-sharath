@@ -14,7 +14,7 @@ int rv, value;
 #define OUT 2
 
 //The LED array is 16x16
-#define array_ind 4
+#define array_ind 16
 
 //Declare variables requried
 int i=0, j=0;
@@ -25,23 +25,17 @@ int gpiowrite(int pin, int value);
 
 int main(void) {
 
-	
-	
-		
 	//Measure voltage with a delay of 500ms as programmed at the array
 	while(i<array_ind) {
 	
 		int read;
 		
 		//this command reads the solar cell output
-		//read=digitalRead(Solar_IN);
 		read = readgpio();
-		
 
 		//Write itback to GPIO 2
-		//digitalWrite(OUT, read);
 		gpiowrite(OUT, read);
-		
+
 		//store the value in a buffer
 		buffer[i][j]=read;
 		
@@ -54,8 +48,8 @@ int main(void) {
 			j=0;
 		}
 	}
+}
 
-}	
 int readgpio()
 {
     chip= gpiod_chip_open("/dev/gpiochip0");
@@ -85,7 +79,7 @@ int readgpio()
 
     return value;
 }	
-	
+
 int gpiowrite(int pin, int value)
 {
     chip= gpiod_chip_open("/dev/gpiochip0");
@@ -110,7 +104,6 @@ int gpiowrite(int pin, int value)
     }
 
     value = gpiod_line_set_value(line, value);
-    //printf("GPIO%d value is set to %d\n", pin, value);
     sleep(1);
     gpiod_chip_close(chip);
 
