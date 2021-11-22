@@ -17,7 +17,7 @@ void func(int sockfd)
 	int n;
 	for (;;) {
 		bzero(buff, sizeof(buff));
-		printf("Enter the string : ");
+		printf("String to transmit: ");
 		n = 0;
 		while ((buff[n++] = getchar()) != '\n')
 			;
@@ -45,10 +45,10 @@ int main()
 		exit(0);
 	}
 	else
-		printf("Socket successfully created..\n");
+		printf("Socket created..\n");
 	bzero(&servaddr, sizeof(servaddr));
 	
-	printf("Enter IP address of the server: ");
+	printf("SERVER IP: ");
 	scanf("%s",ip_addr);
 
 	// assign IP, PORT
