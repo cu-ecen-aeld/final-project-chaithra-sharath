@@ -8,14 +8,14 @@ ifeq ($(CFLAGS),)
 	CFLAGS= -g -Wall -Werror
 endif
 
-all: server client_test
-default: server client_test
+all: server_test client_test
+default: server_test client_test
 
-server.o: server.c
-	$(CC) $(CFLAGS) -c server.c
+server_test.o: server_test.c
+	$(CC) $(CFLAGS) -c server_test.c
 
-server : server.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) server.o -o server
+server_test : server_test.o
+	$(CROSS_COMPILE)$(CC) $(CFLAGS) server_test.o -o server_test
 
 
 client_test.o: client_test.c
@@ -25,4 +25,4 @@ client_test : client_test.o
 	$(CROSS_COMPILE)$(CC) $(CFLAGS) client_test.o -o client_test
 
 clean :
-	rm -f server client_test *.o
+	rm -f server_test client_test *.o
