@@ -12,6 +12,6 @@
  *
  */
 //int * solar_read(void); 
-int* solar_read(int buffer[array_ind][array_ind]) ;
+int* solar_read(int * buffer) ;
 
 #endif 

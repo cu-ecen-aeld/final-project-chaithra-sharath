@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <ctype.h>
+#include "solarc.h"
 
 #define PORT_NUMBER "9000"
 #define BACKLOG_CONNECTIONS 6
@@ -194,6 +195,16 @@ int main(int argc, char *argv[])
 	
 	uint8_t data = 20;
 	
+	int buffer[16][16];
+	printf("calling solar read\n");
+	solar_read((int *)buffer);
+	
+	for(int i = 0; i < 16; i++){
+		for(int j = 0; j < 16; j++) {
+			printf("%d",buffer[i][j]);
+		}
+		printf("\n");
+	}	
 	
 	printf("sending 20\n\r");
 	
@@ -206,9 +217,9 @@ int main(int argc, char *argv[])
 		}
 
 
-	int buffer[16][16] = {0};
+	//int buffer[16][16] = {0};
 	
-	solar_read(buffer);
+	//solar_read(buffer);
 
 	close(client_fd);
 	//free(buf);

@@ -17,7 +17,7 @@
 int i=0, j=0;
 
 
-int* solar_read(int buffer[array_ind][array_ind]) {
+int* solar_read(int *buffer) {
 	//int buffer[array_ind][array_ind];
 	//Measure voltage with a delay of 500ms as programmed at the array
 	while(i<array_ind) {
@@ -31,10 +31,11 @@ int* solar_read(int buffer[array_ind][array_ind]) {
 		gpio_write(OUT, read);
 
 		//store the value in a buffer
-		buffer[i][j]=read;
+		//buffer[i][j]=read;
+		*((buffer+i*array_ind) + j) = read;
 		
 		//Increment the buffer index
-		printf(" %d %d = %d\n", i,j, buffer[i][j]);
+		//printf(" %d %d = %d\n", i,j, buffer[i][j]);
 		j++;
 		if(j==array_ind)
 		{
