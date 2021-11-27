@@ -193,11 +193,11 @@ int main(int argc, char *argv[])
 	inet_ntop(AF_INET, get_in_addr((struct sockaddr *)&their_addr), ipstr, sizeof ipstr);
         syslog(LOG_DEBUG,"Accepted connection from %s", ipstr);
 	
-	uint8_t data = 20;
+	uint8_t data = "20";
 	
 	int buffer[16][16];
 	printf("calling solar read\n");
-	solar_read((int *)buffer);
+	/*solar_read((int *)buffer);
 	
 	for(int i = 0; i < 16; i++){
 		for(int j = 0; j < 16; j++) {
@@ -205,10 +205,11 @@ int main(int argc, char *argv[])
 		}
 		printf("\n");
 	}	
-	
+	*/
 	printf("sending 20\n\r");
+	char * send_val = "AESD FINAL SOCKET TEST";
 	
-	int rc = send(client_fd, &data, sizeof(data), 0);
+	int rc = send(client_fd, send_val, strlen(send_val), 0);
 		if(rc == -1)
 		{
 			perror("send error");
