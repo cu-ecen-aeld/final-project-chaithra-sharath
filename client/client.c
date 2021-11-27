@@ -159,11 +159,10 @@ int main(int argc, char *argv[])
 		printf("connected to the server..\n");
 
 	char buff[80] = {'\0'};
-    	while(1)
-	{
+    	//while(1)
+	//{
 		printf("\n\rFrom Server :");
 		read(socket_fd, buff, sizeof(buff));
 		printf("%s",buff); 
-
-	}
+	//}
 }
