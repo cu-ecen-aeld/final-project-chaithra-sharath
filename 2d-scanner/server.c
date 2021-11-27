@@ -193,10 +193,10 @@ int main(int argc, char *argv[])
 	inet_ntop(AF_INET, get_in_addr((struct sockaddr *)&their_addr), ipstr, sizeof ipstr);
         syslog(LOG_DEBUG,"Accepted connection from %s", ipstr);
 	
-	uint8_t data = "20";
+	//uint8_t data = "20";
 	
-	int buffer[16][16];
-	printf("calling solar read\n");
+	//int buffer[16][16];
+	//printf("calling solar read\n");
 	/*solar_read((int *)buffer);
 	
 	for(int i = 0; i < 16; i++){
