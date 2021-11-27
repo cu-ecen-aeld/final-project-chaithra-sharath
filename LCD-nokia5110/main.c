@@ -2,6 +2,7 @@
 // Nokia 5110 LCD display test program
 //
 // Written by Larry Bank 4/6/2016
+// Edited by Chaithra and Sharath
 //
 #include <stdio.h>
 #include <stdlib.h>
