@@ -195,17 +195,32 @@ int main(int argc, char *argv[])
 	
 	//uint8_t data = "20";
 	
-	//int buffer[16][16];
-	//printf("calling solar read\n");
-	/*solar_read((int *)buffer);
+	int buffer[256];
+	char send_buffer[16];
+	printf("calling solar read\n");
+	solar_read(buffer);
 	
-	for(int i = 0; i < 16; i++){
-		for(int j = 0; j < 16; j++) {
-			printf("%d",buffer[i][j]);
+	int i=0;
+	int k=0;
+	
+	while(i<256)
+	{
+			
+		for(int j=0; j<16; j++)
+		{
+			
+			printf("%d",buffer[i]);
+			i++;
+		
 		}
+		
+		
+		sprintf(&send_buffer[k++], "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",buffer[i-16],buffer[i-15],buffer[i-14],buffer[i-13],buffer[i-12],buffer[i-11],buffer[i-10]
+					,buffer[i-9],buffer[i-8],buffer[i-7],buffer[i-6],buffer[i-5],buffer[i-4],buffer[i-3],buffer[i-2],buffer[i-1]);
+					
 		printf("\n");
 	}	
-	*/
+	
 	printf("sending 20\n\r");
 	char * send_val = "AESD FINAL SOCKET TEST";
 	
@@ -216,6 +231,22 @@ int main(int argc, char *argv[])
 			
 			//Still tries to send next value next time
 		}
+		
+		
+	for(int j=0; j<16; j++)
+	{
+		
+		int rc = send(client_fd, send_buffer, strlen(send_buffer), 0);
+		if(rc == -1)
+		{
+			perror("send buffer error");
+			
+			//Still tries to send next value next time
+		}
+		
+		
+		
+	}
 
 
 	//int buffer[16][16] = {0};

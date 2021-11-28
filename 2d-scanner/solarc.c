@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include <gpiod.h>
 #include "solarc.h"
 
@@ -17,10 +18,41 @@
 int i=0, j=0;
 
 
+void delay(unsigned milliseconds)
+{
+    clock_t end;
+    clock_t begin;
+
+    end = milliseconds * (CLOCKS_PER_SEC / 1000);
+    begin = clock();
+    while( (clock() - begin) < end);
+}
+
 int* solar_read(int *buffer) {
 	//int buffer[array_ind][array_ind];
 	//Measure voltage with a delay of 500ms as programmed at the array
 	while(i<array_ind) {
+	
+	for(int j=0; j<16; j++){	
+		int read;
+		
+		//this command reads the solar cell output
+		read = gpio_read(SOLAR_IN);
+
+		//Write itback to GPIO 2
+		gpio_write(OUT, read);
+
+		
+		buffer[i] = read;
+		
+		
+		
+		i++;
+		
+		delay(500);
+	}
+	
+	for(int j=16; j>0; j--){	
 	
 		int read;
 		
@@ -30,18 +62,17 @@ int* solar_read(int *buffer) {
 		//Write itback to GPIO 2
 		gpio_write(OUT, read);
 
-		//store the value in a buffer
-		//buffer[i][j]=read;
-		*((buffer+i*array_ind) + j) = read;
 		
-		//Increment the buffer index
-		//printf(" %d %d = %d\n", i,j, buffer[i][j]);
-		j++;
-		if(j==array_ind)
-		{
-			i++;
-			j=0;
-		}
+		buffer[i] = read;
+		
+		
+		delay(500);
+		i++;
+	}
+	
+	
+	
+	
 	}
 	
 	return buffer;
