@@ -174,21 +174,17 @@ int main(int argc, char *argv[])
 		printf("%s",buff); 
 	//}
 	
-	char read_buffer[20][20];
-	
-	int k=0;
-	
-	while(k<20)
-	{
-	
-	read(socket_fd, read_buffer[k], sizeof(read_buffer[k]));
-	
-	printf("%s %d %d ",read_buffer[k], read_buffer[k][1], read_buffer[k][20]);
-	
-	k++;	
+	char read_buffer[256];
 	
 	
-	}
+	
+	
+	
+	read(socket_fd, read_buffer, sizeof(read_buffer));
+	
+	printf("%s %d %d ",read_buffer, read_buffer[1], read_buffer[20]);
+	
+	
 	
 	
 	lcd_display();
