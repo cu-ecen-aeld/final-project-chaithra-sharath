@@ -15,6 +15,9 @@
 #include <sys/wait.h>
 #include <errno.h>
 #include <ctype.h>
+#include <stdint.h>
+#include <sys/ioctl.h>
+#include "nokia5110.h"
 
 #define PORT 9000
 #define BACKLOG_CONNECTIONS 6
@@ -25,6 +28,11 @@ int socket_fd, client_fd, write_file_fd;
 struct addrinfo hints, *res;
 char ipstr[INET6_ADDRSTRLEN];
 uint8_t daemon_arg = 0;
+
+
+int lcd_display();
+
+
 
 // get sockaddr, IPv4 or IPv6:
 void *get_in_addr(struct sockaddr *sa)
@@ -165,4 +173,92 @@ int main(int argc, char *argv[])
 		read(socket_fd, buff, sizeof(buff));
 		printf("%s",buff); 
 	//}
+	
+	char read_buffer[20][20];
+	
+	int k=0;
+	
+	while(k<20)
+	{
+	
+	read(socket_fd, read_buffer[k], sizeof(read_buffer[k]));
+	
+	printf("%s %d %d ",read_buffer[k], read_buffer[k][1], read_buffer[k][20]);
+	
+	k++;	
+	
+	
+	}
+	
+	
+	lcd_display();
+	
+	
+	
+	
+}
+
+
+int lcd_display()
+{
+
+int rc;
+int i, x, y;
+
+	// SPI Channel, D/C, RESET, LED
+	rc = nokiaInit(0, 37, 35, 13);
+	if (rc != 0)
+	{
+		printf("Problem initializing nokia5110 library\n");
+		return 0;
+	}
+	
+	nokiaWriteString(2, 1, "AESD Final", FONT_NORMAL);
+	nokiaWriteString(2, 2, "Sharath Jonnala", FONT_NORMAL);
+	nokiaWriteString(1, 3, "Chaithra Suresh", FONT_NORMAL);
+	nokiaWriteString(2, 4, "2d-Object Scanner", FONT_SMALL);
+	
+	usleep(4000000);
+	
+	// draw a box around the whole display
+	for (x=0; x<84; x++)
+	{
+		nokiaSetPixel(x, 0, 1);
+		nokiaSetPixel(x, 47, 1);
+	}
+	for (y=0; y<48; y++)
+	{
+		nokiaSetPixel(0, y, 1);
+		nokiaSetPixel(83, y, 1);
+	}
+	usleep(3000000);
+	for (i=0; i<10000; i++)
+	{
+		x = rand() & 0x7f;
+		y = rand() & 0x3f;
+		// cover entire display with black
+		while (nokiaGetPixel(x,y))
+		{
+			x++;
+			if (x >= 84)
+			{
+				y++;
+				x = 0;
+				if (y >= 48)
+					break;
+			}
+		}
+		nokiaSetPixel(x, y, 1);	
+	}
+	
+	
+	
+	usleep(4000000);
+
+	nokiaShutdown();
+
+
+
+	return 0;
+
 }

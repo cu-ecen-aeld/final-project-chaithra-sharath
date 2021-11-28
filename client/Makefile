@@ -1,22 +1,10 @@
-CROSS_COMPILE=
-
-ifeq ($(CC),)
-	CC=$(CROSS_COMPILE)gcc
-endif
-
-ifeq ($(CFLAGS),)
-	CFLAGS= -g -Wall -Werror
-endif
-
-all: client
-
-default: client
-
-client.o: client.c
-	$(CC) $(CFLAGS) -c client.c
-
-client: client.o
-	$(CROSS_COMPILE)$(CC) $(CFLAGS) client.o -o client -lgpiod
-
-clean :
-	rm -f client *.o
+CC = gcc 
+CFLAGS = -Wall
+LDFLAGS = -lrt -pthread
+OBJFILES = nokia5110.o armbianio.o client.0
+TARGET = client
+all: $(TARGET)
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+clean:
+	rm -f $(OBJFILES) $(TARGET) *~
