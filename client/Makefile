@@ -1,7 +1,7 @@
 CC = gcc 
 CFLAGS = -Wall
 LDFLAGS = -lrt -pthread
-OBJFILES = nokia5110.o armbianio.o client.0
+OBJFILES = nokia5110.o armbianio.o client.o
 TARGET = client
 all: $(TARGET)
 $(TARGET): $(OBJFILES)
