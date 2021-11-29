@@ -41,5 +41,5 @@ int gpio_read(int pin)
     value = gpiod_line_get_value(line);
     gpiod_chip_close(chip);
 
-    return 0;
+    return value;
 }
