@@ -259,13 +259,22 @@ int x, y;
 	{	
 		for(int j=0; j<16; j++)
 		{
-			if(buffer[m]=='O')
+			if(buffer[m]=='O'){
 			nokiaSetPixel(k, j, 0);
-			else nokiaSetPixel(k, j, 1);
+			printf("0");
+			}
+			else {
+			
+			nokiaSetPixel(k, j, 1);
+			printf("1");
+			}
 			m++;
 			if(m==256) break;
 		}
 	}
+	
+	
+	usleep(3000000);
 	nokiaShutdown();
 
 	return 0;
