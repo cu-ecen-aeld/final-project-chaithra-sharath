@@ -198,7 +198,8 @@ int lcd_display(char * buffer)
 {
 
 int rc;
-int i, x, y;
+//int i;
+int x, y;
 
 	// SPI Channel, D/C, RESET, LED
 	rc = nokiaInit(0, 37, 35, 13);
@@ -227,6 +228,9 @@ int i, x, y;
 		nokiaSetPixel(83, y, 1);
 	}
 	usleep(3000000);
+	
+	
+	/*
 	for (i=0; i<10000; i++)
 	{
 		x = rand() & 0x7f;
@@ -245,25 +249,25 @@ int i, x, y;
 		}
 		nokiaSetPixel(x, y, 1);	
 	}
+	*/
 	
 	
-	
-	usleep(4000000);
+	//usleep(4000000);
+	int m=0;
 	
 	for(int k=0; k<16; k++)
 	{	
 		for(int j=0; j<16; j++)
 		{
-			if(buffer[i]=='O')
+			if(buffer[m]=='O')
 			nokiaSetPixel(k, j, 0);
 			else nokiaSetPixel(k, j, 1);
-			i++;
+			m++;
+			if(m==256) break;
 		}
 	}
 	nokiaShutdown();
 
-
-
 	return 0;
-
-}
+	
+	}
