@@ -212,8 +212,8 @@ int main(int argc, char *argv[])
 			
 			printf("%d",buffer[i]);
 			
-			if(buffer[i] == 1) send_buffer[i]= 'L';
-			else send_buffer[i]='O';
+			if(buffer[i] == 0) send_buffer[i]= 'O';
+			else send_buffer[i]='L';
 			
 			i++;
 		
