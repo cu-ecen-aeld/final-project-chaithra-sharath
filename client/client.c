@@ -281,8 +281,9 @@ int x, y;
 			m++;
 			if(m==256) break;
 			
-			printf("\n");
+			
 		}
+		printf("\n");
 	}
 	
 	
