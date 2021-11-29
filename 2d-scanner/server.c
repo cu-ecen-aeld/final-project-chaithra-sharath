@@ -196,12 +196,13 @@ int main(int argc, char *argv[])
 	//uint8_t data = "20";
 	
 	int buffer[256];
-	char send_buffer[16];
+	char send_buffer[256];
 	printf("calling solar read\n");
+	
 	solar_read(buffer);
 	
 	int i=0;
-	int k=0;
+	
 	
 	while(i<256)
 	{
@@ -210,18 +211,29 @@ int main(int argc, char *argv[])
 		{
 			
 			printf("%d",buffer[i]);
+			
+			if(buffer[i] == 1) send_buffer[i]= 'L';
+			else send_buffer[i]='O';
+			
 			i++;
 		
 		}
 		
 		
-		sprintf(&send_buffer[k++], "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",buffer[i-16],buffer[i-15],buffer[i-14],buffer[i-13],buffer[i-12],buffer[i-11],buffer[i-10]
-					,buffer[i-9],buffer[i-8],buffer[i-7],buffer[i-6],buffer[i-5],buffer[i-4],buffer[i-3],buffer[i-2],buffer[i-1]);
+		/*sprintf(send_buffer[k++], "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",buffer[i-16],buffer[i-15],buffer[i-14],buffer[i-13],buffer[i-12],buffer[i-11],buffer[i-10]
+					,buffer[i-9],buffer[i-8],buffer[i-7],buffer[i-6],buffer[i-5],buffer[i-4],buffer[i-3],buffer[i-2],buffer[i-1]);*/
+					
+		
 					
 		printf("\n");
 	}	
 	
-	printf("sending 20\n\r");
+	
+		printf("\n Printing send buffer   ");
+		printf("%s",send_buffer);
+	
+	
+	printf("\n sending AESD FINAL SOCKET TEST\n\r");
 	char * send_val = "AESD FINAL SOCKET TEST";
 	
 	int rc = send(client_fd, send_val, strlen(send_val), 0);

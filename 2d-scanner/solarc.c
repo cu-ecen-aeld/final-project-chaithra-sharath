@@ -31,6 +31,8 @@ void delay(unsigned milliseconds)
 int* solar_read(int *buffer) {
 	//int buffer[array_ind][array_ind];
 	//Measure voltage with a delay of 500ms as programmed at the array
+	
+	
 	while(i<array_ind) {
 	
 	for(int j=0; j<16; j++){	
@@ -63,15 +65,15 @@ int* solar_read(int *buffer) {
 		gpio_write(OUT, read);
 
 		
-		buffer[i] = read;
+		buffer[i+j] = read;
 		
 		
 		delay(500);
-		i++;
+		
 	}
 	
 	
-	
+	i=i+16;
 	
 	}
 	

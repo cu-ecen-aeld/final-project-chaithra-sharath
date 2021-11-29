@@ -6,7 +6,7 @@
 #include "test_gpio_write.h"
 
 //The LED array is 16x16
-#define array_ind 16
+#define array_ind 256
 
 /**
  *
