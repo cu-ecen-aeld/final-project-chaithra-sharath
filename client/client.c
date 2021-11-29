@@ -255,21 +255,33 @@ int x, y;
 	//usleep(4000000);
 	int m=0;
 	
-	for(int k=0; k<16; k++)
+	printf("\n");
+	
+	for(int k=0; k<48; k=k+3)
 	{	
-		for(int j=0; j<16; j++)
+		for(int j=0; j<48; j=j+3)
 		{
 			if(buffer[m]=='O'){
-			nokiaSetPixel(k, j, 0);
-			printf("0");
+			
+			for(int g=k;g<k+3;g++)
+			for(int f=j;f<j+3;f++)
+			
+			nokiaSetPixel(g, f, 0);
+			printf("0 ");
 			}
 			else {
 			
-			nokiaSetPixel(k, j, 1);
-			printf("1");
+			for(int g=k;g<k+3;g++)
+			for(int f=j;f<j+3;f++)
+			
+			nokiaSetPixel(g,f, 1);
+			printf("1 ");
 			}
+			
 			m++;
 			if(m==256) break;
+			
+			printf("\n");
 		}
 	}
 	
