@@ -30,7 +30,7 @@ char ipstr[INET6_ADDRSTRLEN];
 uint8_t daemon_arg = 0;
 
 
-int lcd_display();
+int lcd_display(char * buffer);
 
 
 
@@ -186,8 +186,7 @@ int main(int argc, char *argv[])
 	
 	
 	
-	
-	lcd_display();
+	lcd_display(read_buffer);
 	
 	
 	
@@ -195,7 +194,7 @@ int main(int argc, char *argv[])
 }
 
 
-int lcd_display()
+int lcd_display(char * buffer)
 {
 
 int rc;
@@ -250,7 +249,17 @@ int i, x, y;
 	
 	
 	usleep(4000000);
-
+	
+	for(int k=0; k<16; k++)
+	{	
+		for(int j=0; j<16; j++)
+		{
+			if(buffer[i]=='O')
+			nokiaSetPixel(k, j, 0);
+			else nokiaSetPixel(k, j, 1);
+			i++;
+		}
+	}
 	nokiaShutdown();
 
 

@@ -230,7 +230,7 @@ int main(int argc, char *argv[])
 	
 	
 		printf("\n Printing send buffer   ");
-		printf("%s",send_buffer);
+		printf("%s\n",send_buffer);
 	
 	
 	printf("\n sending AESD FINAL SOCKET TEST\n\r");
