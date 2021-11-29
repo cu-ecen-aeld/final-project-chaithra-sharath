@@ -32,6 +32,7 @@ int* solar_read(int *buffer) {
 	//int buffer[array_ind][array_ind];
 	//Measure voltage with a delay of 500ms as programmed at the array
 	
+	printf(" \n start time %d \n " ,(int)clock());
 	
 	while(i<array_ind) {
 	
@@ -76,7 +77,7 @@ int* solar_read(int *buffer) {
 	i=i+16;
 	
 	}
-	
+	printf(" \n stop time %d \n " ,(int)clock());
 	return buffer;
 }
 
