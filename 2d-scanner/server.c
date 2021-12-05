@@ -197,7 +197,9 @@ int main(int argc, char *argv[])
 	
 	int buffer[256];
 	char send_buffer[256];
-	printf("calling solar read\n");
+	printf("\n Press S to start reading from solar cell\n");
+	
+	while(getchar() != 's');
 	
 	solar_read(buffer);
 	
@@ -213,7 +215,7 @@ int main(int argc, char *argv[])
 			printf("%d",buffer[i]);
 			
 			if(buffer[i] == 0) send_buffer[i]= 'O';
-			else send_buffer[i]='L';
+			else if(buffer[i] == 1)  send_buffer[i]='L';
 			
 			i++;
 		
