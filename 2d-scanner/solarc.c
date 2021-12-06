@@ -52,7 +52,7 @@ int* solar_read(int *buffer) {
 		
 		i++;
 		
-		delay(500);
+		delay(5);
 	}
 	
 	for(int j=16; j>0; j--){	
@@ -69,7 +69,7 @@ int* solar_read(int *buffer) {
 		buffer[i+j] = read;
 		
 		
-		delay(500);
+		delay(5);
 		
 	}
 	
