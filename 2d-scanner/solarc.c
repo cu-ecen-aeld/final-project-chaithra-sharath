@@ -86,6 +86,19 @@ int* solar_read(int *buffer) {
 	buffer[7*16] =0;
 	buffer[13*16] =0;
 	
+	int temp = buffer[(6*16)];
+	
+	for(int y=0; y<15; y++)
+	{
+	
+		buffer[96+y]= buffer[96+y+1];
+	
+	
+	
+	}
+	
+	buffer[96+15]=temp;
+	
 	//printf(" \n stop time %d \n " ,(int)clock());
 	return buffer;
 }
