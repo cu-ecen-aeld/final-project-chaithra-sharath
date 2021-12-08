@@ -8,6 +8,7 @@
 
 //define GPIO 0 as input from solar cell
 #define SOLAR_IN 0
+#define SOLAR_IN_2 5
 
 //define GPIO 2 to reflect whatever is read at GPIO0
 #define OUT 2
@@ -37,16 +38,17 @@ int* solar_read(int *buffer) {
 	while(i<array_ind) {
 	
 	for(int j=0; j<16; j++){	
-		int read;
+		int read=0, read2=0;
 		
 		//this command reads the solar cell output
 		read = gpio_read(SOLAR_IN);
+		read2 = gpio_read(SOLAR_IN_2);
 
 		//Write itback to GPIO 2
 		gpio_write(OUT, read);
 
 		
-		buffer[i] = read;
+		buffer[i] = (read || read2);
 		
 		
 		
@@ -57,16 +59,17 @@ int* solar_read(int *buffer) {
 	
 	for(int j=16; j>0; j--){	
 	
-		int read;
+		int read=0, read2=0;
 		
 		//this command reads the solar cell output
 		read = gpio_read(SOLAR_IN);
+		read2 = gpio_read(SOLAR_IN_2);
 
 		//Write itback to GPIO 2
 		gpio_write(OUT, read);
 
 		
-		buffer[i+j] = read;
+		buffer[i+j] = (read || read2);
 		
 		
 		delay(5);
