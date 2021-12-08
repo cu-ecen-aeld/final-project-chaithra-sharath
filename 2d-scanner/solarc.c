@@ -18,7 +18,11 @@
 //Declare variables requried
 int i=0, j=0;
 
-
+/**
+ * @brief: function to generate a delay
+ * @param: unsigned int milliseconds
+ * @return: void
+ */
 void delay(unsigned milliseconds)
 {
     clock_t end;
@@ -29,11 +33,19 @@ void delay(unsigned milliseconds)
     while( (clock() - begin) < end);
 }
 
+/**
+ * @brief: function to read the state of 
+ * 	   Gpio pin based on the output of
+ *	   of the solar cell. Fills up the buffer	
+ *	   that is sent as argument with the values
+ *	   detected by the solar cell from the 16x16
+ *	   LED array
+ * @param: int *buffer
+ * @return: int *
+ *
+ */	
 int* solar_read(int *buffer) {
-	//int buffer[array_ind][array_ind];
 	//Measure voltage with a delay of 500ms as programmed at the array
-	
-	//printf(" \n start time %d \n " ,(int)clock());
 	
 	while(i<array_ind) {
 	
@@ -47,17 +59,13 @@ int* solar_read(int *buffer) {
 		//Write itback to GPIO 2
 		gpio_write(OUT, read);
 
-		
 		buffer[i] = (read || read2);
 		
-		
-		
 		i++;
-		
 		delay(5);
 	}
 	
-	for(int j=16; j>0; j--){	
+	for(int j=16; j>0; j--){
 	
 		int read=0, read2=0;
 		
@@ -65,22 +73,15 @@ int* solar_read(int *buffer) {
 		read = gpio_read(SOLAR_IN);
 		read2 = gpio_read(SOLAR_IN_2);
 
-		//Write itback to GPIO 2
+		//Write it back to GPIO 2 for debugging purposes
 		gpio_write(OUT, read);
 
-		
 		buffer[i+j] = (read || read2);
 		
-		
 		delay(5);
-		
+		}
+		i=i+16;
 	}
-	
-	
-	i=i+16;
-	
-	}
-	
 	
 	buffer[5*16] =0;
 	buffer[7*16] =0;
@@ -88,18 +89,14 @@ int* solar_read(int *buffer) {
 	
 	int temp = buffer[(6*16)];
 	
+	// buffer clean up
 	for(int y=0; y<15; y++)
 	{
 	
 		buffer[96+y]= buffer[96+y+1];
 	
 	
-	
 	}
-	
-	buffer[96+15]=temp;
-	
-	//printf(" \n stop time %d \n " ,(int)clock());
 	return buffer;
 }
 

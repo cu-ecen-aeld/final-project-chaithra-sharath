@@ -10,6 +10,11 @@ struct gpiod_chip *chip;
 struct gpiod_line *line;
 int rv, value;
 
+/**
+ * @brief: function to write at a gpio pin
+ * @param: int pin
+ * @return int 
+ */
 int gpio_write(int pin, int value)
 {
     chip= gpiod_chip_open("/dev/gpiochip0");

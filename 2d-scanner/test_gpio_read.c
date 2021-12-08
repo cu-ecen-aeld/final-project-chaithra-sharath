@@ -15,6 +15,11 @@ struct gpiod_chip *chip;
 struct gpiod_line *line;
 int rv, value;
 
+/**
+ * @brief: function to read the state of gpio pin
+ * @param: int pin
+ * @return int 
+ */
 int gpio_read(int pin)
 {
     chip= gpiod_chip_open("/dev/gpiochip0");

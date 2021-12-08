@@ -28,6 +28,13 @@ char ipstr[INET6_ADDRSTRLEN];
 uint8_t daemon_arg = 0;
 
 // get sockaddr, IPv4 or IPv6:
+
+/**
+ *  @brief: captures address of the incoming client
+ *	    connection
+ *  @param: struct sockaddr *sa
+ *  @return: void *
+ */
 void *get_in_addr(struct sockaddr *sa)
 {
     if (sa->sa_family == AF_INET) {
@@ -38,7 +45,11 @@ void *get_in_addr(struct sockaddr *sa)
 }
 
 
-/* handler for SIGINT and SIGTERM */
+/**
+ * @brief: Handler for SIGINT and SIGTERM
+ * @param: int signo
+ * @return void
+ */
 static void signal_handler (int signo)
 {
     if (signo == SIGINT || signo == SIGTERM) {
@@ -59,6 +70,11 @@ static void signal_handler (int signo)
     exit (EXIT_SUCCESS);
 }
 
+/**
+ * @brief: Execution entry point
+ * @param: int argc, char *argv[]
+ * @return int
+ */
 int main(int argc, char *argv[])
 {
 
@@ -176,7 +192,6 @@ int main(int argc, char *argv[])
     addr_size = sizeof(their_addr);
 
     // This variable contains total bytes transferred over all connections
-    //int check_tot = 0;
     while(1)
     {
 
@@ -192,8 +207,6 @@ int main(int argc, char *argv[])
 
 	inet_ntop(AF_INET, get_in_addr((struct sockaddr *)&their_addr), ipstr, sizeof ipstr);
         syslog(LOG_DEBUG,"Accepted connection from %s", ipstr);
-	
-	//uint8_t data = "20";
 	
 	int buffer[256];
 	char send_buffer[256];
@@ -223,12 +236,6 @@ int main(int argc, char *argv[])
 			i++;
 		
 		}
-		
-		
-		/*sprintf(send_buffer[k++], "%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d%d",buffer[i-16],buffer[i-15],buffer[i-14],buffer[i-13],buffer[i-12],buffer[i-11],buffer[i-10]
-					,buffer[i-9],buffer[i-8],buffer[i-7],buffer[i-6],buffer[i-5],buffer[i-4],buffer[i-3],buffer[i-2],buffer[i-1]);*/
-					
-		
 					
 		printf("\n");
 	}	
@@ -243,7 +250,6 @@ int main(int argc, char *argv[])
 		if(rc == -1)
 		{
 			perror("send buffer error");
-			
 			//Still tries to send next value next time
 		}
 		
@@ -251,14 +257,6 @@ int main(int argc, char *argv[])
 		
 	}
 
-
-	//int buffer[16][16] = {0};
-	
-	//solar_read(buffer);
-
 	close(client_fd);
-	//free(buf);
-	//free(write_buf);
-	//close(write_file_fd);
     }
 }
