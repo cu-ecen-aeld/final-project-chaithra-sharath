@@ -71,6 +71,8 @@ static void signal_handler (int signo)
 int main(int argc, char *argv[])
 {
 
+	nokiaShutdown();
+
     struct sockaddr_in servaddr;
     openlog("aesdsocket.c", LOG_PID, LOG_USER);
     // Register signals with handler
@@ -168,15 +170,18 @@ int main(int argc, char *argv[])
 	else
 		printf("connected to the server..\n");
 
-	char buff[80] = {'\0'};
+	
+	
     	//while(1)
 	//{
 		printf("\n\rWaiting for data from server :\r\n");
-		read(socket_fd, buff, sizeof(buff));
+		
 		//printf("%s",buff); 
 	//}
 	
 	char read_buffer[256];
+	
+	memset(read_buffer, '0', 256);
 	
 	
 	
@@ -184,7 +189,7 @@ int main(int argc, char *argv[])
 	
 	read(socket_fd, read_buffer, sizeof(read_buffer));
 	
-	printf("%s %d %d ",read_buffer, read_buffer[1], read_buffer[20]);
+	//printf("%s %d %d ",read_buffer, read_buffer[1], read_buffer[20]);
 	
 	
 	
@@ -201,7 +206,7 @@ int lcd_display(char * buffer)
 
 int rc;
 //int i;
-int x, y;
+//int x, y;
 
 	// SPI Channel, D/C, RESET, LED
 	rc = nokiaInit(0, 37, 35, 13);
@@ -211,12 +216,8 @@ int x, y;
 		return 0;
 	}
 	
-	nokiaWriteString(2, 1, "AESD Final", FONT_NORMAL);
-	nokiaWriteString(2, 2, "Sharath Jonnala", FONT_NORMAL);
-	nokiaWriteString(1, 3, "Chaithra Suresh", FONT_NORMAL);
-	nokiaWriteString(2, 4, "2d-Object Scanner", FONT_SMALL);
-	
-	usleep(4000000);
+
+	/*
 	
 	// draw a box around the whole display
 	for (x=0; x<48; x++)
@@ -231,30 +232,9 @@ int x, y;
 	}
 	usleep(3000000);
 	
-	
-	/*
-	for (i=0; i<10000; i++)
-	{
-		x = rand() & 0x7f;
-		y = rand() & 0x3f;
-		// cover entire display with black
-		while (nokiaGetPixel(x,y))
-		{
-			x++;
-			if (x >= 84)
-			{
-				y++;
-				x = 0;
-				if (y >= 48)
-					break;
-			}
-		}
-		nokiaSetPixel(x, y, 1);	
-	}
 	*/
 	
-	
-	//usleep(4000000);
+
 	int m=0;
 	
 	printf("\n");
