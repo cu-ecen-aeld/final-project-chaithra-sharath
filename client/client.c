@@ -68,6 +68,7 @@ static void signal_handler (int signo)
     exit (EXIT_SUCCESS);
 }
 
+/* Execution entry point */
 int main(int argc, char *argv[])
 {
 
@@ -170,14 +171,7 @@ int main(int argc, char *argv[])
 	else
 		printf("connected to the server..\n");
 
-	
-	
-    	//while(1)
-	//{
 		printf("\n\rWaiting for data from server :\r\n");
-		
-		//printf("%s",buff); 
-	//}
 	
 	char read_buffer[256];
 	
@@ -187,25 +181,20 @@ int main(int argc, char *argv[])
 	
 	read(socket_fd, read_buffer, sizeof(read_buffer));
 	
-	//printf("%s %d %d ",read_buffer, read_buffer[1], read_buffer[20]);
-	
-	
-	
 	lcd_display(read_buffer);
-	
-	
-	
 	
 }
 
 
+/**
+ * @brief: function to operate the LCD display
+ * @param: char * buffer
+ * @return int
+ */
 int lcd_display(char * buffer)
 {
 
 int rc;
-//int i;
-//int x, y;
-
 	// SPI Channel, D/C, RESET, LED
 	rc = nokiaInit(0, 37, 35, 13);
 	if (rc != 0)
@@ -214,25 +203,6 @@ int rc;
 		return 0;
 	}
 	
-
-	/*
-	
-	// draw a box around the whole display
-	for (x=0; x<48; x++)
-	{
-		nokiaSetPixel(x, 0, 1);
-		nokiaSetPixel(x, 47, 1);
-	}
-	for (y=0; y<48; y++)
-	{
-		nokiaSetPixel(0, y, 1);
-		nokiaSetPixel(47, y, 1);
-	}
-	usleep(3000000);
-	
-	*/
-	
-
 	int m=0;
 	
 	printf("\n");
@@ -266,10 +236,6 @@ int rc;
 		printf("\n");
 	}
 	
-	
-	//usleep(3000000);
-	
-
 	return 0;
 	
 	}
