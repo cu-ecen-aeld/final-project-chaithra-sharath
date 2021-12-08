@@ -63,6 +63,8 @@ static void signal_handler (int signo)
     }
 
     closelog();
+    nokiaShutdown();
+    
     exit (EXIT_SUCCESS);
 }
 
@@ -169,9 +171,9 @@ int main(int argc, char *argv[])
 	char buff[80] = {'\0'};
     	//while(1)
 	//{
-		printf("\n\rFrom Server :");
+		printf("\n\rWaiting for data from server :\r\n");
 		read(socket_fd, buff, sizeof(buff));
-		printf("%s",buff); 
+		//printf("%s",buff); 
 	//}
 	
 	char read_buffer[256];
@@ -217,7 +219,7 @@ int x, y;
 	usleep(4000000);
 	
 	// draw a box around the whole display
-	for (x=0; x<84; x++)
+	for (x=0; x<48; x++)
 	{
 		nokiaSetPixel(x, 0, 1);
 		nokiaSetPixel(x, 47, 1);
@@ -225,7 +227,7 @@ int x, y;
 	for (y=0; y<48; y++)
 	{
 		nokiaSetPixel(0, y, 1);
-		nokiaSetPixel(83, y, 1);
+		nokiaSetPixel(47, y, 1);
 	}
 	usleep(3000000);
 	
@@ -287,8 +289,8 @@ int x, y;
 	}
 	
 	
-	usleep(3000000);
-	nokiaShutdown();
+	//usleep(3000000);
+	
 
 	return 0;
 	
