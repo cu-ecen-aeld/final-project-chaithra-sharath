@@ -181,9 +181,7 @@ int main(int argc, char *argv[])
 	
 	char read_buffer[256];
 	
-	memset(read_buffer, '0', 256);
-	
-	
+	memset(read_buffer, '0', 256);	
 	
 	
 	
