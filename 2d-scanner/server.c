@@ -234,21 +234,7 @@ int main(int argc, char *argv[])
 	}	
 	
 	
-		printf("\n Printing send buffer   ");
-		printf("%s\n",send_buffer);
 	
-	
-	printf("\n sending AESD FINAL SOCKET TEST\n\r");
-	char * send_val = "AESD FINAL SOCKET TEST";
-	
-	int rc = send(client_fd, send_val, strlen(send_val), 0);
-		if(rc == -1)
-		{
-			perror("send error");
-			
-			//Still tries to send next value next time
-		}
-		
 		
 	for(int j=0; j<16; j++)
 	{
