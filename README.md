@@ -1,7 +1,8 @@
 # final-project-chaithra-sharath
 
-References: 
+Demo Outline links: 
 
-https://github.com/bitbank2/nokia5110
+[Chaithra Demo Outline](https://github.com/cu-ecen-aeld/final-project-chaithra-sharath/wiki/Chaithra-Suresh-Demo-Video)
 
-https://github.com/bitbank2/ArmbianIO
+
+[Sharath Demo Outline](https://github.com/cu-ecen-aeld/final-project-chaithra-sharath/wiki/Sharath-Jonnala-DemoVideo)
